@@ -158,6 +158,13 @@ func (cache *ImportCache) Create(childSandboxPool sandbox.SandboxPool, isLeaf bo
 		panic(fmt.Errorf("did not find Zygote; at least expected to find the root"))
 	}
 	slog.Info(fmt.Sprintf("Try using Zygote from <%v>", node))
+	fmt.Printf("\n========== ZYGOTE LOOKUP ==========\n")
+	fmt.Printf("  Function requires: %v\n", meta.Installs)
+	fmt.Printf("  Matched node:      %v\n", node)
+	fmt.Printf("  Node packages:     %v\n", node.Packages)
+	fmt.Printf("  All packages:      %v\n", node.AllPackages())
+	fmt.Printf("  Is root:           %v\n", len(node.Packages) == 0)
+	fmt.Printf("===================================\n\n")
 	return cache.createChildSandboxFromNode(childSandboxPool, node, isLeaf, codeDir, scratchDir, meta)
 }
 
